@@ -1,34 +1,22 @@
 {% extends 'base.html' %}
-{% block navbar %}
+{% import 'bootstrap/wtf.html' as wtf%}
+{% import 'macros.html' as macro%}
 
 
 
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"> PITCH IT </a>
-            <ul class="nav navbar-nav">
-                
-            </ul>
+{% block content %}
+    <title> {{ title }} </title>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-lg-2"> </div>
+
+            <div class=" col-xs-12 col-sm-12 col-md-8 col-lg-8 create-group">
+
+                {{ wtf.quick_form(category_form) }}
+
+            </div>
+
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated %}
-                <li><a href="{{url_for('main.profile',uname=current_user.username)}}"> <strong>{{current_user.username| upper}} </strong></a></li>
-                <li><a href="{{url_for('auth.logout')}}">SIGN OUT</a></li>
-                {% else %}
-                <li><a href="{{url_for('auth.login')}}">SIGN IN</a></li>
-                {%endif%}
-            </ul>
-        </div>
-
     </div>
-</div>
-
 {% endblock %}
