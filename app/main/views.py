@@ -84,7 +84,7 @@ def view_pitch(id):
     if pitches is None:
         abort(404)
     #
-    comment = Comments.get_comments(id)
+    comment = Comment.get_comments(id)
     return render_template('pitch.html', pitches=pitches, comment=comment, category_id=id)
 
 
@@ -112,5 +112,6 @@ def profile(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
 
     return render_template("profile/profile.html", user = user)

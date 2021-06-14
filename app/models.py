@@ -91,7 +91,7 @@ class Comment(db.Model):
 
     @classmethod
     def get_comments(self, id):
-        comment = Comments.query.order_by(Comments.time_posted.desc()).filter_by(pitches_id=id).all()
+        comment = Comment.query.order_by(Comment.time_posted.desc()).filter_by(pitches_id=id).all()
         return comment
 
 
