@@ -13,11 +13,11 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
-    pitches = db.relationship('Pitch', backref = 'user', lazy = "dynamic")
-    comments = db.relationship('Comment', backref = 'user', lazy = "dynamic")
+    pitches = db.relationship('Pitch', backref = 'users', lazy = "dynamic")
+    comments = db.relationship('Comment', backref = 'users', lazy = "dynamic")
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String(100))
-    photoprofiles = db.relationship('PhotoProfile', backref = 'user', lazy = 'dynamic')
+    photoprofiles = db.relationship('PhotoProfile', backref = 'users', lazy = 'dynamic')
 
     @property
     def password(self):
@@ -56,7 +56,7 @@ class Pitch(db.Model):
     # display pitches
 
     def get_pitches(id):
-        pitches = Pitch.query.filter_by(category_id=id).all()
+        pitches = Pitch.query.filter_by(category=id).all()
         return pitches
 
 

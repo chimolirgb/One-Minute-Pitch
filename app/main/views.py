@@ -15,8 +15,7 @@ def index():
    
     category = Category.get_categories()
 
-
-    return render_template('index.html',  category = category)
+    return render_template('index.html',category = category)
 
 @main.route('/add/category', methods=['GET','POST'])
 @login_required
@@ -41,9 +40,9 @@ def new_category():
 def category(id):
     category_ = Category.query.get(id)
     pitches = Pitch.query.filter_by(category=category_.id).all()
-
-    # pitches=Pitch.get_pitches(id)
-    # title = f'{category.name} page'
+    print('category')
+    pitches=Pitch.get_pitches(id)
+    #title = f'{category.name} page'
     return render_template('category.html', pitches=pitches, category=category_)
 
 #Route for adding a new pitch
@@ -67,6 +66,7 @@ def new_pitch(id):
 
 
     title = 'New Pitch'
+
     return render_template('new_pitch.html', title = title, pitch_form = form, category = category)
 
 #viewing a Pitch with its comments
