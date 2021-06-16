@@ -32,10 +32,6 @@ $ cd NewsPI
 $ python3.8 -m venv --without-pip virtual
   $ source virtual/bin/env
   $ curl https://bootstrap.pypa.io/get-pip.py | python
-
-  # Setting up the API key
-   To be able to gather article info from the News API you will need an API Key.
-
   * In the root directory of the project folder create a file: start.sh
   * Insert the following info into it:
 
