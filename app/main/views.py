@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for, abort
 from . import main
-from ..models import User, Pitch, Category, Vote, Comment
+from ..models import User, Pitch, Category, Likes, Dislikes , Comment
 from flask_login import login_required, current_user
 from .forms import UpdateProfile, PitchForm, CommentForm, CategoryForm
 from .. import db, photos
@@ -16,6 +16,7 @@ def index():
     category = Category.get_categories()
 
     return render_template('index.html',category = category)
+    
 
 @main.route('/add/category', methods=['GET','POST'])
 @login_required
@@ -115,3 +116,24 @@ def profile(uname):
 
 
     return render_template("profile/profile.html", user = user)
+
+@main.route('/pitch/likes/<pitch_id>', methods = ['GET', 'POST'])
+@login_required
+def likes(pitch_id):    
+    if Likes.query.filter(Likes.user_id==current_user.id,Likes.pitch_id==pitch_id).first():
+        return redirect(url_for('main.index'))
+
+    new_likes = Likes(pitch_id=pitch_id, user_id = current_user.id)
+    new_likes.save_likes()
+    return redirect(url_for('main.index'))
+
+@main.route('/pitch/dislikes/<pitch_id>', methods = ['GET', 'POST'])
+@login_required
+def dislikes(pitch_id):
+    if Dislikes.query.filter(Dislikes.user_id==current_user.id,Dislikes.pitch_id==pitch_id).first():
+        return  redirect(url_for('main.index'))
+
+    new_dislikes = Dislikes(pitch_id=pitch_id, user_id = current_user.id)
+    new_dislikes.save_dislikes()
+    return redirect(url_for('main.index'))
+   

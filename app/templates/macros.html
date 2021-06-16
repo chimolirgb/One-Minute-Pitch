@@ -17,6 +17,8 @@
             <h3>{{pitches.content}}</h3>
             
             <p style="color: blue;">Written by:  {{pitches.users.username}} <a href="/pitch/{{pitches.id}}" class="btn btn-info pull-right btn-sm">Read More</a> </p>
+            <a href="{{url_for('main.likes',pitch_id = pitches.id)}}" class= "btn btn-primary btn-sm"><i></i>Likes <span>{{pitches.likes.count()}}</span></a>
+            <a href="{{url_for('main.dislikes',pitch_id = pitches.id)}}" class= "btn btn-danger btn-sm"><i></i>Dislikes <span>{{pitches.dislikes.count()}}</span></a>
       </div>
     </div>
    </div>
